@@ -1,22 +1,16 @@
 package org.example;
 
-import org.example.system.SystemController;
-import org.example.wiseSaying.WiseSaying;
+import org.example.System.SystemController;
 import org.example.wiseSaying.WiseSayingController;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class App {
-    Scanner sc;
     SystemController systemController;
     WiseSayingController wiseSayingController;
 
-    App (Scanner sc) {
-        this.sc = sc;
+    App () {
         this.systemController = new SystemController();
-        this.wiseSayingController = new WiseSayingController(sc);
+        this.wiseSayingController = new WiseSayingController();
     }
     void run () {
         System.out.println("== 명언 앱 ==");
@@ -24,12 +18,12 @@ public class App {
         while (true) {
 
             System.out.print("명령)");
-            String command = sc.nextLine().trim();
+            String command = Container.getSc().nextLine().trim();
             if (command.equals("종료")) {
                 systemController.exit();
                 break;
             } else if (command.equals("등록")) {
-                wiseSayingController.write();
+                wiseSayingController.create();
             } else if (command.equals("목록")) {
                 wiseSayingController.list();
             }
