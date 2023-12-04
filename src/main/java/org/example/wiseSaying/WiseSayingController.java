@@ -33,4 +33,7 @@ public class WiseSayingController {
         }
     }
 
+    public void delete() {
+
+    }
 }
