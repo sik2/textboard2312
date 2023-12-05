@@ -20,6 +20,8 @@ public class Request {
         for (String paramsRow :paramsList) {
             String[] paramsStr = paramsRow.split("=", 2);
 
+            if (paramsStr.length == 1) return;
+
             String key = paramsStr[0];
             String value = paramsStr[1];
 
