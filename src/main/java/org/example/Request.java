@@ -11,7 +11,9 @@ public class Request {
     public Request(String command) {
         String[] commandList = command.split("\\?", 2);
 
-        actionCode = commandList[0]; // 삭제
+        actionCode = commandList[0];
+
+        if (commandList.length == 1) return;
 
         String[] paramsList = commandList[1].split("&");
 
