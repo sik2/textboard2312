@@ -38,11 +38,8 @@ public class WiseSayingController {
 
         int id = _getIntParam(request.getParams("id"));
 
-        for (int i = 0; i < wiseSayingList.size(); i++) {
-            if (wiseSayingList.get(i).getId() == id) {
-                wiseSayingList.remove(wiseSayingList.get(i));
-            }
-        }
+        WiseSaying ws = _getFindById(id);
+        wiseSayingList.remove(ws);
 
         System.out.println(id + "번 명언이 삭제되었습니다.");
     }
@@ -55,5 +52,14 @@ public class WiseSayingController {
             System.out.println("id는 정수만 입력이 가능합니다.");
             return defaultValue;
         }
+    }
+
+    private WiseSaying _getFindById(int id) {
+        for (int i = 0; i < wiseSayingList.size(); i++) {
+            if (wiseSayingList.get(i).getId() == id) {
+                return wiseSayingList.get(i);
+            }
+        }
+        return null;
     }
 }
