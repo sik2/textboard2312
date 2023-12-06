@@ -38,6 +38,10 @@ public class WiseSayingController {
 
         int id = _getIntParam(request.getParams("id"));
 
+        if (id == -1) {
+            return;
+        }
+
         WiseSaying ws = _getFindById(id);
 
         if (ws == null) {
@@ -71,6 +75,10 @@ public class WiseSayingController {
 
     public void modify(Request request) {
         int id = _getIntParam(request.getParams("id"));
+
+        if (id == -1) {
+            return;
+        }
 
         WiseSaying ws = _getFindById(id);
 
