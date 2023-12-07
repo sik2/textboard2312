@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class WiseSayingController {
     WiseSayingService wiseSayingService;
 
-    WiseSayingController () {
+    public WiseSayingController () {
         this.wiseSayingService = new WiseSayingService();
     }
 
@@ -29,6 +29,8 @@ public class WiseSayingController {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
 
+        List<WiseSaying> wiseSayingList = this.wiseSayingService.findByAll();
+
         for (WiseSaying ws : wiseSayingList) {
             System.out.println(ws.getId() + " / " + ws.getContent() + " / " + ws.getAuthor());
         }
@@ -42,14 +44,15 @@ public class WiseSayingController {
             return;
         }
 
-        WiseSaying ws = _getFindById(id);
+        WiseSaying ws = this.wiseSayingService.getFindById(id);
 
         if (ws == null) {
             System.out.println(id+"번 명언은 존재하지 않습니다.");
             return;
         }
 
-        wiseSayingList.remove(ws);
+        this.wiseSayingService.delete(ws);
+
 
         System.out.println(id + "번 명언이 삭제되었습니다.");
     }
@@ -64,15 +67,6 @@ public class WiseSayingController {
         }
     }
 
-    private WiseSaying _getFindById(int id) {
-        for (int i = 0; i < wiseSayingList.size(); i++) {
-            if (wiseSayingList.get(i).getId() == id) {
-                return wiseSayingList.get(i);
-            }
-        }
-        return null;
-    }
-
     public void modify(Request request) {
         int id = _getIntParam(request.getParams("id"));
 
@@ -80,7 +74,7 @@ public class WiseSayingController {
             return;
         }
 
-        WiseSaying ws = _getFindById(id);
+        WiseSaying ws = this.wiseSayingService.getFindById(id);
 
         if (ws == null) {
             System.out.println(id+"번 명언은 존재하지 않습니다.");
@@ -95,8 +89,7 @@ public class WiseSayingController {
         System.out.print("작가 : ");
         String author = Container.getSc().nextLine();
 
-        ws.setContent(content);
-        ws.setAuthor(author);
+        this.wiseSayingService.modify(ws, content, author);
 
         System.out.println(id + "번 명언이 수정 되었습니다.");
 

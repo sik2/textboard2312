@@ -15,4 +15,25 @@ public class WiseSayingService {
 
         return ws.getId();
     }
+
+    public List<WiseSaying> findByAll() {
+        return wiseSayingList;
+    }
+
+    public void delete (WiseSaying ws) {
+        wiseSayingList.remove(ws);
+    }
+    public void modify (WiseSaying ws, String content, String author) {
+        ws.setAuthor(author);
+        ws.setContent(content);
+    }
+
+    public WiseSaying getFindById(int id) {
+        for (int i = 0; i < wiseSayingList.size(); i++) {
+            if (wiseSayingList.get(i).getId() == id) {
+                return wiseSayingList.get(i);
+            }
+        }
+        return null;
+    }
 }
