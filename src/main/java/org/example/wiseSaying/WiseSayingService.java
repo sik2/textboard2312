@@ -4,36 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WiseSayingService {
-    List<WiseSaying> wiseSayingList = new ArrayList<>();
-    int lastId = 1;
+
+    private WiseSayingRepository wiseSayingRepository;
+
+    WiseSayingService () {
+        wiseSayingRepository = new WiseSayingRepository();
+    }
 
     public int create (String content, String author) {
-        WiseSaying ws = new WiseSaying(lastId, content, author);
-
-        wiseSayingList.add(ws);
-        lastId++;
-
-        return ws.getId();
+        return this.wiseSayingRepository.create(content, author);
     }
 
     public List<WiseSaying> findByAll() {
-        return wiseSayingList;
+        return this.wiseSayingRepository.findByAll();
     }
 
     public void delete (WiseSaying ws) {
-        wiseSayingList.remove(ws);
+        this.wiseSayingRepository.delete(ws);
     }
     public void modify (WiseSaying ws, String content, String author) {
-        ws.setAuthor(author);
-        ws.setContent(content);
+        this.wiseSayingRepository.modify(ws, content, author);
     }
 
     public WiseSaying getFindById(int id) {
-        for (int i = 0; i < wiseSayingList.size(); i++) {
-            if (wiseSayingList.get(i).getId() == id) {
-                return wiseSayingList.get(i);
-            }
-        }
-        return null;
+        return this.wiseSayingRepository.getFindById(id);
     }
 }
