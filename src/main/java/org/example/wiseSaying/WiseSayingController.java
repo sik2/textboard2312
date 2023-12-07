@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class WiseSayingController {
-    List<WiseSaying> wiseSayingList = new ArrayList<>();
-    int lastId = 1;
+    WiseSayingService wiseSayingService;
+
+    WiseSayingController () {
+        this.wiseSayingService = new WiseSayingService();
+    }
 
     public void create () {
         System.out.print("명언 : ");
@@ -17,12 +20,9 @@ public class WiseSayingController {
         System.out.print("작가 : ");
         String author = Container.getSc().nextLine().trim();
 
-        WiseSaying ws = new WiseSaying(lastId, content, author);
+        int id = this.wiseSayingService.create(content, author);
 
-        wiseSayingList.add(ws);
-
-        System.out.println(lastId + "번 명언이 등록 되었습니다.");
-        lastId++;
+        System.out.println(id + "번 명언이 등록 되었습니다.");
     }
 
     public void list () {
